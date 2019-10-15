@@ -18,6 +18,43 @@ class Users::TokenController < DeviseController
     render json: payload(user), status: :ok
   end
 
+  # @return [Object]
+  def create_customer
+    user = User.new(customer_params)
+    if user.save
+      customer = Customer.new(user_id: user.id)
+      self.resource = warden.set_user(user, scope: :user)
+      sign_in(resource_name, resource)
+
+      if customer.save
+        render json: customer, status: :created
+      else
+        render json: customer.errors, status: :unprocessable_entity
+      end
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # @return [Object]
+  def create_business
+    user = User.new(create_business_user_params)
+    if user.save
+      business = Business.new(user_id: user.id, **create_business_params)
+
+      self.resource = warden.set_user(user, scope: :user)
+      sign_in(resource_name, resource)
+
+      if business.save
+        render json: business, status: :created
+      else
+        render json: business.errors, status: :unprocessable_entity
+      end
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def payload(user)
@@ -65,6 +102,20 @@ class Users::TokenController < DeviseController
   end
 
   private
+
+  # Only allow a trusted parameter "white list" through.
+  def customer_params
+    params.require(:customer).permit(:name, :email, :password)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def create_business_params
+    params.require(:business).permit(:business_name, :location)
+  end
+
+  def create_business_user_params
+    params.require(:business).permit(:email, :password)
+  end
 
   # Check if there is no signed in user before doing the sign out.
   #
