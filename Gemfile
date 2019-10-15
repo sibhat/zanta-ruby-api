@@ -9,6 +9,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.9'
 
+gem 'dotenv-rails'
+
 # gives access to the Google APIs
 gem 'google-api-client'
 
@@ -48,7 +50,6 @@ gem 'signet'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'factory_bot_rails'
 
