@@ -2,26 +2,23 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST users/login', type: :request do
-  let(:url) { '/users/login' }
-  let(:user) { create(:user) }
-  let(:params) do
+RSpec.describe 'POST /api/v1/sign_up', type: :request do
+  let(:url) { '/api/v1/sign_up' }
+  let(:user) do
     {
-      user: {
-        email: user.email,
-        password: user.password
-      }
+      email: 'user@example.com',
+      password: 'password'
     }
   end
+  let(:params) { { user: user } }
 
-  context 'valid login request' do
-    before do
-      puts user.jti
-      post url, params: params
-    end
-    it 'should return 201 status code' do
+  context 'valid user' do
+    before { post url, params: params }
+
+    it 'returns 201' do
       expect(response.status).to eq 201
     end
+
     it 'returns a new user' do
       response_body = JSON.parse(response.body).deep_symbolize_keys
       expect(response_body[:email]).to eq(user[:email])
@@ -32,10 +29,10 @@ RSpec.describe 'POST users/login', type: :request do
     end
   end
   context 'inValid user' do
-    before { post url, params: { email: 'email@yao.com' } }
+    before { post url, params: {email: 'email@yao.com'}  }
 
-    it 'returns 401' do
-      expect(response.status).to eq 401
+    it 'returns 422' do
+      expect(response.status).to eq 422
     end
 
     it 'returns a new user' do

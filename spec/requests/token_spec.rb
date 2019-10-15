@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST users/token', type: :request do
-  let(:url) { '/users/token' }
+RSpec.describe 'POST /api/v1/token', type: :request do
+  let(:url) { '/api/v1/token' }
   let(:user) do
     {
         email: 'user@example.com',
