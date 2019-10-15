@@ -301,7 +301,13 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
     jwt.dispatch_requests = [
-      ['POST', %r{^/users/token$}]
+        ['POST', %r{^/users/token$}],
+        ['POST', %r{^/api/v1/register/businesses$}],
+        ['POST', %r{^/api/v1/register/customers$}]
+    ]
+    jwt.revocation_requests = [
+        ['DELETE', %r{^/users/logout$}],
+        ['GET', %r{^/revocation_path_2$}],
     ]
   end
   config.navigational_formats = []
