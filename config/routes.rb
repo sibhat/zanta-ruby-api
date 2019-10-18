@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   devise_for :users, defaults: { format: :json }, controllers: {
     sessions: 'users/sessions', registrations: 'users/registrations'
   }, path: 'api/v1', path_names: {
@@ -14,8 +13,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :businesses, only: %i[show destroy update]
+      resources :businesses, only: %i[index show destroy update]
       resources :customers, only: %i[show destroy update]
+      resources :services, only: %i[index show create destroy update]
     end
   end
   devise_scope :user do
