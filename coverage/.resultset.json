@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/sibhattemelso/Documents/WebDev/lambda/fullstack/45-supp2u/zanta-ruby-be/zanta/app/controllers/api/v1/services_controller.rb": [
+      "/Users/sibhattemelso/Documents/WebDev/lambda/fullstack/45-supp2u/zanta-ruby-be/zanta/app/controllers/api/v1/businesses_controller.rb": [
         1,
         1,
         null,
@@ -20,17 +20,6 @@
         null,
         1,
         0,
-        null,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
         0,
         null,
         0,
@@ -43,6 +32,7 @@
         null,
         null,
         1,
+        null,
         null,
         1,
         0,
@@ -64,6 +54,6 @@
         null
       ]
     },
-    "timestamp": 1571245154
+    "timestamp": 1571362862
   }
 }

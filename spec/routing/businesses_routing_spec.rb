@@ -9,7 +9,7 @@ RSpec.describe Api::V1::BusinessesController, type: :routing do
     # end
 
     it 'routes to #show' do
-      expect(get: '//api/v1/businesses/1').to route_to('api/v1/businesses#show', id: '1')
+      expect(get: '/api/v1/businesses/1').to route_to('api/v1/businesses#show', id: '1')
     end
 
     it 'routes to #update via PUT' do
